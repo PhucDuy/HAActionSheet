@@ -16,7 +16,7 @@ class ViewController: UIViewController {
   }
   
   @IBAction func showAction(_ sender: Any) {
-    let view = HAActionSheet(fromView: self.view, sourceData: ["Sample", "Sample"])
+    let view = HAActionSheet(sourceData: ["Sample", "Sample"])
     view.delegate = self
     view.buttonCornerRadius = 16
     view.show()
