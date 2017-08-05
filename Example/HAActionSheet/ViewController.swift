@@ -14,7 +14,8 @@ class ViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     let view = HAActionSheet(fromView: self.view, sourceData: ["Sample", "Sample"])
-    
+//    view.delegate = self
+    view.show()
     // Do any additional setup after loading the view, typically from a nib.
   }
   
@@ -25,3 +26,8 @@ class ViewController: UIViewController {
   
 }
 
+//extension ViewController: HAActionSheetDelegate {
+//  func HAActionSheet(_ actionSheet: HAActionSheet, didSelectRowAt index: Int) {
+//    print(index)
+//  }
+//}
