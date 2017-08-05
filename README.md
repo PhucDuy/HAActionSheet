@@ -54,7 +54,7 @@ class ViewController: UIViewController {
     super.viewDidLoad()
 
     let view = HAActionSheet(fromView: self.view, sourceData: data)
-    view.buttonCornerRadius  = 16
+    view.buttonCornerRadius = 16
     view.delegate = self
     view.show()
   } 
