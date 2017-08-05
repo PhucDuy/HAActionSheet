@@ -32,13 +32,19 @@ public class HAActionSheet: UIView {
   public init(fromView: UIView, sourceData: [String], cancelButtonTitle: String? = "Cancel") {
     super.init(frame: fromView.frame)
     
-    UINib(nibName: "HAActionSheet", bundle: Bundle.main).instantiate(withOwner: self, options: nil)
-    addSubview(view)
-    view.frame = self.bounds
-    fromView.addSubview(self)
-    
-    self.sourceData = sourceData
-    self.cancelButtonTitle = cancelButtonTitle!
+    let podBundle = Bundle.init(for: self.classForCoder)
+    if let bundleURL = podBundle.url(forResource: "HAActionSheet", withExtension: "bundle") {
+      let bundle = Bundle.init(url: bundleURL)
+      UINib(nibName: "HAActionSheet", bundle: bundle).instantiate(withOwner: self, options: nil)
+      addSubview(view)
+      view.frame = self.bounds
+      fromView.addSubview(self)
+      
+      self.sourceData = sourceData
+      self.cancelButtonTitle = cancelButtonTitle!
+    }else {
+      assertionFailure("Could not create a path to the bundle")
+    }
   }
   
   override init(frame: CGRect) {
@@ -116,13 +122,19 @@ extension HAActionSheet: UITableViewDataSource {
   public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
     if cell == nil {
-      let customCell = Bundle.main.loadNibNamed("HAActionSheetCell", owner: self, options: nil)?[0] as? HAActionSheetCell
-      customCell?.prepare(title: self.sourceData[indexPath.row],
-                          titleColor: self.buttonTitleColor,
-                          bgColor: self.buttonBackgroundColor,
-                          seperatorColor: self.seperatorColor,
-                          font: self.titleFont)
-      cell = customCell
+      let podBundle = Bundle.init(for: self.classForCoder)
+      if let bundleURL = podBundle.url(forResource: "HAActionSheet", withExtension: "bundle") {
+        let bundle = Bundle.init(url: bundleURL)
+        let customCell = UINib(nibName: "HAActionSheetCell", bundle: bundle).instantiate(withOwner: self, options: nil)[0] as? HAActionSheetCell
+        customCell?.prepare(title: self.sourceData[indexPath.row],
+                            titleColor: self.buttonTitleColor,
+                            bgColor: self.buttonBackgroundColor,
+                            seperatorColor: self.seperatorColor,
+                            font: self.titleFont)
+        cell = customCell
+      }else {
+        assertionFailure("Could not create a path to the bundle")
+      }
     }
     
     return cell!

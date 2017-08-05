@@ -30,12 +30,11 @@ HAActionSheet is a dynamic action sheet for iOS written in Swift 3.0.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'RWPickFlavor/**/*.{swift}'
-  s.resources = 'HAActionSheet/**/*.{png,jpeg,jpg,storyboard,xib}'
-
-# s.resource_bundles = {
-  #   'HAActionSheet' => ['HAActionSheet/Assets/*.png']
-  # }
+  s.source_files = 'HAActionSheet/Classes/**/*'
+  
+   s.resource_bundles = {
+     'HAActionSheet' => ['HAActionSheet/Resources/**/*.{png,jpeg,jpg,storyboard,xib}']
+   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
