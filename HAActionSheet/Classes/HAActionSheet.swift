@@ -43,10 +43,9 @@ public class HAActionSheet: UIView {
       let bundle = Bundle.init(url: bundleURL)
       UINib(nibName: "HAActionSheet", bundle: bundle).instantiate(withOwner: self, options: nil)
       addSubview(view)
-      self.frame = (UIApplication.shared.keyWindow?.rootViewController?.view.frame)!
+      self.frame = (UIApplication.shared.keyWindow?.frame)!
       view.frame = self.bounds
-      UIApplication.shared.keyWindow?.rootViewController?.view.addSubview(self)
-      
+      UIApplication.shared.keyWindow?.addSubview(self)
       self.sourceData = sourceData
       self.cancelButtonTitle = cancelButtonTitle!
     }else {
