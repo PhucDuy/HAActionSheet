@@ -1,4 +1,4 @@
-###HAActionSheet
+### HAActionSheet
 
 Hello everyone,
 You can think this pod as a dynamic action sheet for ios written in Swift 3.0.
@@ -73,7 +73,10 @@ print("Selected item: \(data[index]) at index: \(index)")
 ## Options
 
 ```swift
-internal var cancelButtonTitle: String
+
+/// title for cancel button, default is "Cancel"
+public var cancelButtonTitle: String
+
 /// corner radius for cancel button, first and last button, default is 0.0
 public var buttonCornerRadius: CGFloat
 
