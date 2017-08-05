@@ -65,7 +65,8 @@ extension ViewController: HAActionSheetDelegate {
   func didCancel(_ pickerView: HAActionSheet) {
     print("Canceled")
   }
-
+  
+  /// required
   func HAActionSheet(_ pickerView: HAActionSheet, didSelectRowAt index: Int) {
     print("Selected item: \(data[index]) at index: \(index)")
   }
