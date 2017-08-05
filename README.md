@@ -1,7 +1,6 @@
 ### HAActionSheet
 
-Hello everyone,
-You can think this pod as a dynamic action sheet for ios written in Swift 3.0.
+This tool is a dynamic action sheet for ios and written in Swift 3.0.
 
 ## Requirements
 
