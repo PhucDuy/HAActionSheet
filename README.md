@@ -61,7 +61,8 @@ class ViewController: UIViewController {
 }
 
 extension ViewController: HAActionSheetDelegate {
-  func didClickCancelButton(_ pickerView: HAActionSheet) {
+  /// optional
+  func didCancel(_ pickerView: HAActionSheet) {
     print("Canceled")
   }
 
