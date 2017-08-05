@@ -35,17 +35,17 @@ public class HAActionSheet: UIView {
   
   var sourceData: [String]!
   
-  public init(sourceData: [String], cancelButtonTitle: String? = "Cancel") {
-    super.init(frame: .zero)
+  public init(fromView: UIView, sourceData: [String], cancelButtonTitle: String? = "Cancel") {
+    super.init(frame: fromView.frame)
     
     let podBundle = Bundle.init(for: self.classForCoder)
     if let bundleURL = podBundle.url(forResource: "HAActionSheet", withExtension: "bundle") {
       let bundle = Bundle.init(url: bundleURL)
       UINib(nibName: "HAActionSheet", bundle: bundle).instantiate(withOwner: self, options: nil)
       addSubview(view)
-      self.frame = (UIApplication.shared.keyWindow?.frame)!
       view.frame = self.bounds
-      UIApplication.shared.keyWindow?.addSubview(self)
+      fromView.addSubview(self)
+      
       self.sourceData = sourceData
       self.cancelButtonTitle = cancelButtonTitle!
     }else {
