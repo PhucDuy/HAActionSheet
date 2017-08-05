@@ -18,6 +18,7 @@ class ViewController: UIViewController {
   @IBAction func showAction(_ sender: Any) {
     let view = HAActionSheet(fromView: self.view, sourceData: ["Sample", "Sample"])
     view.delegate = self
+    view.buttonCornerRadius = 16
     view.show()
   }
 }
@@ -25,5 +26,9 @@ class ViewController: UIViewController {
 extension ViewController: HAActionSheetDelegate {
   func haActionSheet(_ actionSheet: HAActionSheet, didSelectRowAt index: Int) {
     print(index)
+  }
+  
+  func didCancel(_ pickerView: HAActionSheet) {
+    print("Canceled")
   }
 }

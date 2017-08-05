@@ -21,6 +21,7 @@ public class HAActionSheet: UIView {
   
   var animatedCells                      = [IndexPath]()
   var cancelButtonTitle                  = ""
+  public var buttonCornerRadius: CGFloat = 0.0
   public var disableAnimation            = true
   public var titleFont                   = UIFont.systemFont(ofSize: 17)
   public var cancelButtonTitleColor      = UIColor.red
@@ -72,6 +73,8 @@ public class HAActionSheet: UIView {
     self.cancelButton.setTitleColor(self.cancelButtonTitleColor, for: .normal)
     self.cancelButton.backgroundColor = self.cancelButtonBackgroundColor
     self.cancelButton.titleLabel?.font = self.titleFont
+    self.listContainerView.layer.cornerRadius = self.buttonCornerRadius
+    self.cancelButton.layer.cornerRadius = self.buttonCornerRadius
     
     self.tableView.delegate = self
     self.tableView.dataSource = self
@@ -94,14 +97,15 @@ public class HAActionSheet: UIView {
     self.cancelButton.transform = CGAffineTransform(translationX: 0,
                                                     y: self.frame.size.height)
     
-    UIView.animate(withDuration: 0.2, animations: {
+    UIView.animate(withDuration: 0.4, animations: {
       self.cancelButton.transform = .identity
       self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
-    })
-    
-    UIView.animate(withDuration: 0.4, animations: {
       self.listContainerView.transform = .identity
     })
+    
+//    UIView.animate(withDuration: 0.4, animations: {
+//      
+//    })
   }
   
   func removeView() {
