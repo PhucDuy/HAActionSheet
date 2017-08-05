@@ -16,17 +16,18 @@ public class HAActionSheet: UIView {
   @IBOutlet private var listContainerTopConst: NSLayoutConstraint!
   @IBOutlet var cancelButton: UIButton!
   
-  var delegate: HAActionSheetDelegate!
+  public var delegate: HAActionSheetDelegate!
+  public var cancelButtonTitle = ""
+  public var disableAnimation = false
+  public var cancelButtonTitleColor = UIColor.red
+  public var cancelButtonBackgroundColor = UIColor.white
+  public var buttonTitleColor = UIColor.blue
+  public var buttonBackgroundColor = UIColor.white
+  public var seperatorColor = UIColor(red: 237.0/255.0, green: 237.0/255.0, blue: 239.0/255.0, alpha: 1)
+  public var titleFont = UIFont.systemFont(ofSize: 17)
+  
   var sourceData: [String]!
   var animatedCells = [IndexPath]()
-  var cancelButtonTitle = ""
-  var disableAnimation = false
-  var cancelButtonTitleColor = UIColor.red
-  var cancelButtonBackgroundColor = UIColor.white
-  var buttonTitleColor = UIColor.blue
-  var buttonBackgroundColor = UIColor.white
-  var seperatorColor = UIColor(red: 237.0/255.0, green: 237.0/255.0, blue: 239.0/255.0, alpha: 1)
-  var titleFont = UIFont.systemFont(ofSize: 17)
   
   public init(fromView: UIView, sourceData: [String], cancelButtonTitle: String? = "Cancel") {
     super.init(frame: fromView.frame)
@@ -161,7 +162,7 @@ extension HAActionSheet: UITableViewDelegate {
   }
 }
 
-@objc protocol HAActionSheetDelegate {
+@objc public protocol HAActionSheetDelegate {
   @objc optional func didClickCancelButton(_ pickerView: HAActionSheet)
   @objc func HAActionSheet(_ actionSheet: HAActionSheet, didSelectRowAt index: Int)
 }

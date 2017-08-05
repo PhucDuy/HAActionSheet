@@ -13,6 +13,7 @@ class ViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    let view = HAActionSheet(fromView: self.view, sourceData: ["Sample", "Sample"])
     
     // Do any additional setup after loading the view, typically from a nib.
   }
