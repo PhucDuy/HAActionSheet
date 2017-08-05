@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'HAActionSheet_Example' do
+  pod 'HAActionSheet', :path => '../'
+
+  target 'HAActionSheet_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
