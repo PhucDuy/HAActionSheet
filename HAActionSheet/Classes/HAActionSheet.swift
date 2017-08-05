@@ -21,7 +21,7 @@ public class HAActionSheet: UIView {
   
   var animatedCells                      = [IndexPath]()
   var cancelButtonTitle                  = ""
-  public var disableAnimation            = false
+  public var disableAnimation            = true
   public var titleFont                   = UIFont.systemFont(ofSize: 17)
   public var cancelButtonTitleColor      = UIColor.red
   public var cancelButtonBackgroundColor = UIColor.white
@@ -61,7 +61,10 @@ public class HAActionSheet: UIView {
   }
   
   @IBAction func cancelButtonAction(_ sender: Any) {
-    self.delegate.didClickCancelButton!(self)
+    if let _ = self.delegate.didCancel?(self) {
+      self.delegate.didCancel!(self)
+    }
+    
     self.removeView()
   }
   
@@ -163,7 +166,7 @@ extension HAActionSheet: UITableViewDelegate {
   
   public func tableView(_ tableView: UITableView,
                         didSelectRowAt indexPath: IndexPath) {
-    self.delegate.HAActionSheet(self, didSelectRowAt: indexPath.row)
+    self.delegate.haActionSheet(self, didSelectRowAt: indexPath.row)
     self.removeView()
   }
   
@@ -189,6 +192,6 @@ extension HAActionSheet: UITableViewDelegate {
 }
 
 @objc public protocol HAActionSheetDelegate {
-  @objc optional func didClickCancelButton(_ pickerView: HAActionSheet)
-  @objc func HAActionSheet(_ actionSheet: HAActionSheet, didSelectRowAt index: Int)
+  @objc optional func didCancel(_ pickerView: HAActionSheet)
+  @objc func haActionSheet(_ actionSheet: HAActionSheet, didSelectRowAt index: Int)
 }

@@ -17,13 +17,13 @@ class ViewController: UIViewController {
   
   @IBAction func showAction(_ sender: Any) {
     let view = HAActionSheet(fromView: self.view, sourceData: ["Sample", "Sample"])
-//    view.delegate = self
+    view.delegate = self
     view.show()
   }
 }
 
-//extension ViewController: HAActionSheetDelegate {
-//  func HAActionSheet(_ actionSheet: HAActionSheet, didSelectRowAt index: Int) {
-//    print(index)
-//  }
-//}
+extension ViewController: HAActionSheetDelegate {
+  func haActionSheet(_ actionSheet: HAActionSheet, didSelectRowAt index: Int) {
+    print(index)
+  }
+}
