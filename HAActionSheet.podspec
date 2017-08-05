@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+HAActionSheet is a dynamic action sheet for iOS written in Swift 3.0.
                        DESC
 
   s.homepage         = 'https://github.com/hasanlsn/HAActionSheet'
