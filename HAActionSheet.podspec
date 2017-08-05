@@ -26,7 +26,7 @@ HAActionSheet is a dynamic action sheet for iOS written in Swift 3.0.
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'hasanlsn' => 'hasan@happydigital.com.tr' }
   s.source           = { :git => 'https://github.com/hasanlsn/HAActionSheet.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  # s.social_media_url = 'https://twitter.com/nnasanali'
 
   s.ios.deployment_target = '8.0'
 

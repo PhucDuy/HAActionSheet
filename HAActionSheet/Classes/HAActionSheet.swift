@@ -1,6 +1,6 @@
 //
 //  HAActionSheet.swift
-//  HAPicker
+//  HAActionSheet
 //
 //  Created by Hasan Asan on 04/08/2017.
 //  Copyright © 2017 Hasan Ali Asan. All rights reserved.
@@ -9,25 +9,30 @@
 import UIKit
 
 public class HAActionSheet: UIView {
-  @IBOutlet var view: UIView!
-  @IBOutlet var listContainerView: UIView!
-  @IBOutlet private var tableView: UITableView!
-  @IBOutlet private var listContainerHeightConst: NSLayoutConstraint!
-  @IBOutlet private var listContainerTopConst: NSLayoutConstraint!
-  @IBOutlet var cancelButton: UIButton!
+  @IBOutlet private var view              : UIView!
+  @IBOutlet private var listContainerView : UIView!
+  @IBOutlet private var cancelButton      : UIButton!
+  @IBOutlet private var tableView         : UITableView!
+  
+  @IBOutlet private var listContainerHeightConst : NSLayoutConstraint!
+  @IBOutlet private var listContainerTopConst    : NSLayoutConstraint!
   
   public var delegate: HAActionSheetDelegate!
-  public var cancelButtonTitle = ""
-  public var disableAnimation = false
-  public var cancelButtonTitleColor = UIColor.red
+  
+  var animatedCells                      = [IndexPath]()
+  var cancelButtonTitle                  = ""
+  public var disableAnimation            = false
+  public var titleFont                   = UIFont.systemFont(ofSize: 17)
+  public var cancelButtonTitleColor      = UIColor.red
   public var cancelButtonBackgroundColor = UIColor.white
-  public var buttonTitleColor = UIColor.blue
-  public var buttonBackgroundColor = UIColor.white
-  public var seperatorColor = UIColor(red: 237.0/255.0, green: 237.0/255.0, blue: 239.0/255.0, alpha: 1)
-  public var titleFont = UIFont.systemFont(ofSize: 17)
+  public var buttonTitleColor            = UIColor.blue
+  public var buttonBackgroundColor       = UIColor.white
+  public var seperatorColor              = UIColor(red: 237.0/255.0,
+                                                   green: 237.0/255.0,
+                                                   blue: 239.0/255.0,
+                                                   alpha: 1)
   
   var sourceData: [String]!
-  var animatedCells = [IndexPath]()
   
   public init(fromView: UIView, sourceData: [String], cancelButtonTitle: String? = "Cancel") {
     super.init(frame: fromView.frame)
@@ -81,8 +86,10 @@ public class HAActionSheet: UIView {
     }
     
     self.tableView.setContentOffset(scrollPoint, animated: false)
-    self.listContainerView.transform = CGAffineTransform(translationX: 0, y: self.frame.size.height)
-    self.cancelButton.transform = CGAffineTransform(translationX: 0, y: self.frame.size.height)
+    self.listContainerView.transform = CGAffineTransform(translationX: 0,
+                                                         y: self.frame.size.height)
+    self.cancelButton.transform = CGAffineTransform(translationX: 0,
+                                                    y: self.frame.size.height)
     
     UIView.animate(withDuration: 0.2, animations: {
       self.cancelButton.transform = .identity
@@ -115,11 +122,13 @@ extension HAActionSheet: UITableViewDataSource {
     return 1
   }
   
-  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  public func tableView(_ tableView: UITableView,
+                        numberOfRowsInSection section: Int) -> Int {
     return self.sourceData.count
   }
   
-  public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  public func tableView(_ tableView: UITableView,
+                        cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
     if cell == nil {
       let podBundle = Bundle.init(for: self.classForCoder)
@@ -142,20 +151,25 @@ extension HAActionSheet: UITableViewDataSource {
 }
 
 extension HAActionSheet: UITableViewDelegate {
-  public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  public func tableView(_ tableView: UITableView,
+                        heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableViewAutomaticDimension
   }
   
-  public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+  public func tableView(_ tableView: UITableView,
+                        estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     return 60
   }
   
-  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  public func tableView(_ tableView: UITableView,
+                        didSelectRowAt indexPath: IndexPath) {
     self.delegate.HAActionSheet(self, didSelectRowAt: indexPath.row)
     self.removeView()
   }
   
-  public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+  public func tableView(_ tableView: UITableView,
+                        willDisplay cell: UITableViewCell,
+                        forRowAt indexPath: IndexPath) {
     if disableAnimation {
       return
     }
