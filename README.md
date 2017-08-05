@@ -2,6 +2,8 @@
 
 This tool is a dynamic action sheet for ios and written in Swift 3.0.
 
+[logo]: https://github.com/hasanlsn/HAActionSheet/blob/master/appvideo.gif "App Video"
+
 ## Requirements
 
 - iOS 8.0+
