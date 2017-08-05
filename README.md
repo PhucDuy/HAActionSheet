@@ -36,3 +36,70 @@ Then, run the following command:
 ```bash
 $ pod install
 ```
+
+## Usage
+
+```swift
+import UIKit
+import HAActionSheet
+class ViewController: UIViewController {
+
+let data = ["Apple",
+"Orange",
+"Banana",
+"Berry"]
+
+override func viewDidLoad() {
+super.viewDidLoad()
+
+let view = HAActionSheet(fromView: self.view, sourceData: data)
+view.buttonCornerRadius  = 16
+view.delegate = self
+view.show()
+} 
+}
+
+extension ViewController: HAActionSheetDelegate {
+func didClickCancelButton(_ pickerView: HAActionSheet) {
+print("Canceled")
+}
+
+func HAActionSheet(_ pickerView: HAActionSheet, didSelectRowAt index: Int) {
+print("Selected item: \(data[index]) at index: \(index)")
+}
+}
+```
+
+## Options
+
+```swift
+internal var cancelButtonTitle: String
+/// corner radius for cancel button, first and last button, default is 0.0
+public var buttonCornerRadius: CGFloat
+
+/// disable button show animation, default is true
+public var disableAnimation: Bool
+
+/// font for button titles, default is system font
+public var titleFont: UIFont
+
+/// cancel button title color, default is red
+public var cancelButtonTitleColor: UIColor
+
+/// cancel button background color, default is white
+public var cancelButtonBackgroundColor: UIColor
+
+/// button title color, default is blue
+public var buttonTitleColor: UIColor
+
+/// button background color, default is white
+public var buttonBackgroundColor:UIColor
+
+/// button seperator color, default is #EDEDEF
+public var seperatorColor: UIColor
+```
+
+## TODO
+
+- Fully iPad support
+- More animation
