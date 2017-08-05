@@ -5,7 +5,6 @@ target 'HAActionSheet_Example' do
 
   target 'HAActionSheet_Tests' do
     inherit! :search_paths
-
     
   end
 end

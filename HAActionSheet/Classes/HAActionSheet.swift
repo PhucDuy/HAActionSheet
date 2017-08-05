@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HAActionSheet: UIView {
+public class HAActionSheet: UIView {
   @IBOutlet var view: UIView!
   @IBOutlet var listContainerView: UIView!
   @IBOutlet private var tableView: UITableView!
@@ -28,7 +28,7 @@ class HAActionSheet: UIView {
   var seperatorColor = UIColor(red: 237.0/255.0, green: 237.0/255.0, blue: 239.0/255.0, alpha: 1)
   var titleFont = UIFont.systemFont(ofSize: 17)
   
-  init(fromView: UIView, sourceData: [String], cancelButtonTitle: String? = "Cancel") {
+  public init(fromView: UIView, sourceData: [String], cancelButtonTitle: String? = "Cancel") {
     super.init(frame: fromView.frame)
     
     UINib(nibName: "HAActionSheet", bundle: Bundle.main).instantiate(withOwner: self, options: nil)
@@ -44,7 +44,7 @@ class HAActionSheet: UIView {
     super.init(frame: frame)
   }
   
-  required init?(coder aDecoder: NSCoder) {
+  required public init?(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
   
@@ -53,7 +53,7 @@ class HAActionSheet: UIView {
     self.removeView()
   }
   
-  func show() {
+  public func show() {
     self.cancelButton.setTitleColor(self.cancelButtonTitleColor, for: .normal)
     self.cancelButton.backgroundColor = self.cancelButtonBackgroundColor
     self.cancelButton.titleLabel?.font = self.titleFont
@@ -104,15 +104,15 @@ class HAActionSheet: UIView {
 }
 
 extension HAActionSheet: UITableViewDataSource {
-  func numberOfSections(in tableView: UITableView) -> Int {
+  public func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
   
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+  public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return self.sourceData.count
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
     if cell == nil {
       let customCell = Bundle.main.loadNibNamed("HAActionSheetCell", owner: self, options: nil)?[0] as? HAActionSheetCell
@@ -129,20 +129,20 @@ extension HAActionSheet: UITableViewDataSource {
 }
 
 extension HAActionSheet: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+  public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableViewAutomaticDimension
   }
   
-  func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+  public func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     return 60
   }
   
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+  public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     self.delegate.HAActionSheet(self, didSelectRowAt: indexPath.row)
     self.removeView()
   }
   
-  func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+  public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     if disableAnimation {
       return
     }
