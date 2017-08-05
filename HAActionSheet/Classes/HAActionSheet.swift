@@ -20,7 +20,7 @@ public class HAActionSheet: UIView {
   public var delegate: HAActionSheetDelegate!
   
   var animatedCells                      = [IndexPath]()
-  var cancelButtonTitle                  = ""
+  public var cancelButtonTitle           = "Cancel"
   public var buttonCornerRadius: CGFloat = 0.0
   public var disableAnimation            = true
   public var titleFont                   = UIFont.systemFont(ofSize: 17)
@@ -35,7 +35,7 @@ public class HAActionSheet: UIView {
   
   var sourceData: [String]!
   
-  public init(fromView: UIView, sourceData: [String], cancelButtonTitle: String? = "Cancel") {
+  public init(fromView: UIView, sourceData: [String]) {
     super.init(frame: fromView.frame)
     
     let podBundle = Bundle.init(for: self.classForCoder)
@@ -47,7 +47,6 @@ public class HAActionSheet: UIView {
       fromView.addSubview(self)
       
       self.sourceData = sourceData
-      self.cancelButtonTitle = cancelButtonTitle!
     }else {
       assertionFailure("Could not create a path to the bundle")
     }
@@ -75,6 +74,7 @@ public class HAActionSheet: UIView {
     self.cancelButton.titleLabel?.font = self.titleFont
     self.listContainerView.layer.cornerRadius = self.buttonCornerRadius
     self.cancelButton.layer.cornerRadius = self.buttonCornerRadius
+    self.cancelButton.setTitle(self.cancelButtonTitle, for: .normal)
     
     self.tableView.delegate = self
     self.tableView.dataSource = self
