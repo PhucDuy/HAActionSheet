@@ -67,7 +67,7 @@ extension ViewController: HAActionSheetDelegate {
   }
   
   /// required
-  func HAActionSheet(_ pickerView: HAActionSheet, didSelectRowAt index: Int) {
+  func haActionSheet(_ actionSheet: HAActionSheet, didSelectRowAt index: Int) {
     print("Selected item: \(data[index]) at index: \(index)")
   }
 }
