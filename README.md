@@ -27,7 +27,7 @@ platform :ios, '10.0'
 use_frameworks!
 
 target '<Your Target Name>' do
-pod 'HAActionSheet',
+  pod 'HAActionSheet'
 end
 ```
 
@@ -42,31 +42,31 @@ $ pod install
 ```swift
 import UIKit
 import HAActionSheet
+
 class ViewController: UIViewController {
+  let data = ["Apple",
+              "Orange",
+              "Banana",
+              "Berry"]
 
-let data = ["Apple",
-"Orange",
-"Banana",
-"Berry"]
+  override func viewDidLoad() {
+    super.viewDidLoad()
 
-override func viewDidLoad() {
-super.viewDidLoad()
-
-let view = HAActionSheet(fromView: self.view, sourceData: data)
-view.buttonCornerRadius  = 16
-view.delegate = self
-view.show()
-} 
+    let view = HAActionSheet(fromView: self.view, sourceData: data)
+    view.buttonCornerRadius  = 16
+    view.delegate = self
+    view.show()
+  } 
 }
 
 extension ViewController: HAActionSheetDelegate {
-func didClickCancelButton(_ pickerView: HAActionSheet) {
-print("Canceled")
-}
+  func didClickCancelButton(_ pickerView: HAActionSheet) {
+    print("Canceled")
+  }
 
-func HAActionSheet(_ pickerView: HAActionSheet, didSelectRowAt index: Int) {
-print("Selected item: \(data[index]) at index: \(index)")
-}
+  func HAActionSheet(_ pickerView: HAActionSheet, didSelectRowAt index: Int) {
+    print("Selected item: \(data[index]) at index: \(index)")
+  }
 }
 ```
 
