@@ -94,11 +94,11 @@ public class HAActionSheet: UIView {
                                                     y: self.frame.size.height)
     
     DispatchQueue.main.async {
-      UIView.animate(withDuration: 0.5, animations: {
+      UIView.animate(withDuration: 0.3, animations: {
         self.listContainerView.transform = .identity
       })
       
-      UIView.animate(withDuration: 0.6, animations: {
+      UIView.animate(withDuration: 0.4, animations: {
         self.cancelButton.transform = .identity
         self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
       })
@@ -107,12 +107,12 @@ public class HAActionSheet: UIView {
   
   func removeView() {
     DispatchQueue.main.async {
-      UIView.animate(withDuration: 0.5, animations: {
+      UIView.animate(withDuration: 0.3, animations: {
         self.cancelButton.transform = CGAffineTransform(translationX: 0, y: self.frame.size.height)
         self.view.backgroundColor = .clear
       })
       
-      UIView.animate(withDuration: 0.6, animations: {
+      UIView.animate(withDuration: 0.4, animations: {
         self.listContainerView.transform = CGAffineTransform(translationX: 0, y: self.frame.size.height)
       }, completion: { (_) in
         self.removeFromSuperview()
