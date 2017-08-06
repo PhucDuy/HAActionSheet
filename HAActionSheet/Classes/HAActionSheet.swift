@@ -22,7 +22,7 @@ public class HAActionSheet: UIView {
   var animatedCells                      = [IndexPath]()
   public var cancelButtonTitle           = "Cancel"
   public var buttonCornerRadius: CGFloat = 0.0
-  public var disableAnimation            = true
+  public var disableCellAnimation        = true
   public var titleFont                   = UIFont.systemFont(ofSize: 17)
   public var cancelButtonTitleColor      = UIColor.red
   public var cancelButtonBackgroundColor = UIColor.white
@@ -97,25 +97,26 @@ public class HAActionSheet: UIView {
     self.cancelButton.transform = CGAffineTransform(translationX: 0,
                                                     y: self.frame.size.height)
     
-    UIView.animate(withDuration: 0.4, animations: {
-      self.cancelButton.transform = .identity
-      self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
-      self.listContainerView.transform = .identity
-    })
-    
-//    UIView.animate(withDuration: 0.4, animations: {
-//      
-//    })
+    DispatchQueue.main.async {
+      UIView.animate(withDuration: 0.5, animations: {
+        self.listContainerView.transform = .identity
+      })
+      
+      UIView.animate(withDuration: 0.6, animations: {
+        self.cancelButton.transform = .identity
+        self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+      })
+    }
   }
   
   func removeView() {
     DispatchQueue.main.async {
-      UIView.animate(withDuration: 0.4, animations: {
+      UIView.animate(withDuration: 0.5, animations: {
         self.cancelButton.transform = CGAffineTransform(translationX: 0, y: self.frame.size.height)
         self.view.backgroundColor = .clear
       })
       
-      UIView.animate(withDuration: 0.2, animations: {
+      UIView.animate(withDuration: 0.6, animations: {
         self.listContainerView.transform = CGAffineTransform(translationX: 0, y: self.frame.size.height)
       }, completion: { (_) in
         self.removeFromSuperview()
@@ -177,7 +178,7 @@ extension HAActionSheet: UITableViewDelegate {
   public func tableView(_ tableView: UITableView,
                         willDisplay cell: UITableViewCell,
                         forRowAt indexPath: IndexPath) {
-    if disableAnimation {
+    if disableCellAnimation {
       return
     }
     
