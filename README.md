@@ -2,7 +2,7 @@
 
 This tool is a dynamic action sheet for ios and written in Swift 3.0.
 
-![App Video](https://github.com/hasanlsn/HAActionSheet/raw/master/appvideo2.gif)
+![App Video](https://github.com/hasanlsn/HAActionSheet/raw/master/appvideo.gif)
 
 ## Requirements
 
