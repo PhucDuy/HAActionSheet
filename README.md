@@ -84,7 +84,7 @@ public var cancelButtonTitle: String
 public var buttonCornerRadius: CGFloat
 
 /// disable button show animation, default is true
-public var disableAnimation: Bool
+public var disableCellAnimation: Bool
 
 /// font for button titles, default is system font
 public var titleFont: UIFont
