@@ -13,14 +13,29 @@ class ViewController: UIViewController {
   let data = ["Apple",
               "Orange",
               "Banana",
-              "Berry"]
+              "Berry",
+              "Apricot",
+              "Asparagus",
+              "Aubergine",
+              "Avocado",
+              "Beetroot",
+              "Black-eye bean",
+              "Broad bean",
+              "Broccoli",
+              "Brussels sprout",
+              "Butternut Squash",
+              "Carrot",
+              "Cherry",
+              "Clementine",
+              "Courgette",
+              "Date"]
   
   override func viewDidLoad() {
     super.viewDidLoad()
   }
   
   @IBAction func showAction(_ sender: Any) {
-    let view = HAActionSheet(fromView: self.view, sourceData: data)
+    let view = HAActionSheet(fromView: (self.navigationController?.view)!, sourceData: data)
     view.buttonCornerRadius = 16
     view.delegate = self
     view.show()

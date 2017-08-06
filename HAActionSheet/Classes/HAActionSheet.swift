@@ -78,20 +78,16 @@ public class HAActionSheet: UIView {
     
     self.tableView.delegate = self
     self.tableView.dataSource = self
-    
-    var scrollPoint: CGPoint!
+  
     self.tableView.reloadData()
     if self.tableView.contentSize.height < self.frame.size.height {
       self.listContainerTopConst.isActive = false
       self.listContainerHeightConst.constant = self.tableView.contentSize.height
-      scrollPoint = CGPoint(x: 0, y: self.tableView.frame.size.height)
     } else {
       self.listContainerHeightConst.constant = self.tableView.frame.size.height
       self.listContainerTopConst.isActive = true
-      scrollPoint = CGPoint(x: 0, y: self.tableView.contentSize.height - self.tableView.frame.size.height)
     }
     
-    self.tableView.setContentOffset(scrollPoint, animated: false)
     self.listContainerView.transform = CGAffineTransform(translationX: 0,
                                                          y: self.frame.size.height)
     self.cancelButton.transform = CGAffineTransform(translationX: 0,
@@ -137,23 +133,21 @@ extension HAActionSheet: UITableViewDataSource {
   
   public func tableView(_ tableView: UITableView,
                         cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    var cell = tableView.dequeueReusableCell(withIdentifier: "cell")
+    var cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? HAActionSheetCell
     if cell == nil {
       let podBundle = Bundle.init(for: self.classForCoder)
       if let bundleURL = podBundle.url(forResource: "HAActionSheet", withExtension: "bundle") {
         let bundle = Bundle.init(url: bundleURL)
-        let customCell = UINib(nibName: "HAActionSheetCell", bundle: bundle).instantiate(withOwner: self, options: nil)[0] as? HAActionSheetCell
-        customCell?.prepare(title: self.sourceData[indexPath.row],
-                            titleColor: self.buttonTitleColor,
-                            bgColor: self.buttonBackgroundColor,
-                            seperatorColor: self.seperatorColor,
-                            font: self.titleFont)
-        cell = customCell
-      }else {
-        assertionFailure("Could not create a path to the bundle")
+        cell = UINib(nibName: "HAActionSheetCell", bundle: bundle).instantiate(withOwner: self,
+                                                                               options: nil)[0] as? HAActionSheetCell
       }
     }
     
+    cell?.prepare(title: self.sourceData[indexPath.row],
+                  titleColor: self.buttonTitleColor,
+                  bgColor: self.buttonBackgroundColor,
+                  seperatorColor: self.seperatorColor,
+                  font: self.titleFont)
     return cell!
   }
 }
