@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'HAActionSheet'
-  s.version          = '0.1.6'
+  s.version          = '0.1.7'
   s.summary          = 'HAActionSheet is a dynamic action sheet for iOS.'
   s.description      = <<-DESC
 HAActionSheet is a dynamic action sheet for iOS written in Swift 3.0.
