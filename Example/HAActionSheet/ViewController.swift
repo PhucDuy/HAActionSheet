@@ -35,21 +35,13 @@ class ViewController: UIViewController {
   }
   
   @IBAction func showAction(_ sender: Any) {
-    let view = HAActionSheet(fromView: (self.navigationController?.view)!, sourceData: data)
+    let view = HAActionSheet(fromView: self.view, sourceData: data)
     view.buttonCornerRadius = 16
-    view.delegate = self
-    view.show()
-  }
-}
-
-extension ViewController: HAActionSheetDelegate {
-  /// optional
-  func didCancel(_ pickerView: HAActionSheet) {
-    print("Canceled")
-  }
-  
-  /// required
-  func haActionSheet(_ actionSheet: HAActionSheet, didSelectRowAt index: Int) {
-    print("Selected item: \(data[index]) at index: \(index)")
+    
+    view.show { (canceled, index) in
+      if !canceled {
+       print(self.data[index!])
+      }
+    }
   }
 }

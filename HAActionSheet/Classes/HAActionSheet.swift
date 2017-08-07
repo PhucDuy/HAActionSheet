@@ -17,8 +17,6 @@ public class HAActionSheet: UIView {
   @IBOutlet private var listContainerHeightConst : NSLayoutConstraint!
   @IBOutlet private var listContainerTopConst    : NSLayoutConstraint!
   
-  public var delegate: HAActionSheetDelegate!
-  
   var animatedCells                      = [IndexPath]()
   public var cancelButtonTitle           = "Cancel"
   public var buttonCornerRadius: CGFloat = 0.0
@@ -34,6 +32,8 @@ public class HAActionSheet: UIView {
                                                    alpha: 1)
   
   var sourceData: [String]!
+  
+  var handler: ((_ canceled: Bool, _ index: Int?) -> Void)? = nil
   
   public init(fromView: UIView, sourceData: [String]) {
     super.init(frame: fromView.frame)
@@ -61,14 +61,11 @@ public class HAActionSheet: UIView {
   }
   
   @IBAction func cancelButtonAction(_ sender: Any) {
-    if let _ = self.delegate.didCancel?(self) {
-      self.delegate.didCancel!(self)
-    }
-    
+    self.handler!(true, nil)
     self.removeView()
   }
   
-  public func show() {
+  public func show(completion: @escaping(_ canceled: Bool, _ index: Int?) -> Void) {
     self.cancelButton.setTitleColor(self.cancelButtonTitleColor, for: .normal)
     self.cancelButton.backgroundColor = self.cancelButtonBackgroundColor
     self.cancelButton.titleLabel?.font = self.titleFont
@@ -103,6 +100,8 @@ public class HAActionSheet: UIView {
         self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
       })
     }
+    
+    self.handler = completion
   }
   
   func removeView() {
@@ -165,7 +164,7 @@ extension HAActionSheet: UITableViewDelegate {
   
   public func tableView(_ tableView: UITableView,
                         didSelectRowAt indexPath: IndexPath) {
-    self.delegate.haActionSheet(self, didSelectRowAt: indexPath.row)
+    self.handler!(false, indexPath.row)
     self.removeView()
   }
   
@@ -188,9 +187,4 @@ extension HAActionSheet: UITableViewDelegate {
       })
     }
   }
-}
-
-@objc public protocol HAActionSheetDelegate {
-  @objc optional func didCancel(_ pickerView: HAActionSheet)
-  @objc func haActionSheet(_ actionSheet: HAActionSheet, didSelectRowAt index: Int)
 }
