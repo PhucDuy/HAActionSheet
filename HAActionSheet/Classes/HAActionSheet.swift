@@ -19,12 +19,18 @@ public class HAActionSheet: UIView {
   
   var animatedCells                      = [IndexPath]()
   public var cancelButtonTitle           = "Cancel"
-  public var buttonCornerRadius: CGFloat = 0.0
+  public var title                       = ""
+  public var message                     = ""
+  public var buttonCornerRadius: CGFloat = 16.0
   public var disableCellAnimation        = true
   public var titleFont                   = UIFont.systemFont(ofSize: 17)
+  public var headerTitleFont             = UIFont.boldSystemFont(ofSize: 17)
+  public var headerMessageFont           = UIFont.systemFont(ofSize: 14)
   public var cancelButtonTitleColor      = UIColor.red
   public var cancelButtonBackgroundColor = UIColor.white
   public var buttonTitleColor            = UIColor.blue
+  public var headerTextColor             = UIColor.black
+  public var headerBackgroundColor       = UIColor.white
   public var buttonBackgroundColor       = UIColor.white
   public var seperatorColor              = UIColor(red: 237.0/255.0,
                                                    green: 237.0/255.0,
@@ -75,7 +81,7 @@ public class HAActionSheet: UIView {
     
     self.tableView.delegate = self
     self.tableView.dataSource = self
-  
+    
     self.tableView.reloadData()
     if self.tableView.contentSize.height < self.frame.size.height {
       self.listContainerTopConst.isActive = false
@@ -168,23 +174,36 @@ extension HAActionSheet: UITableViewDelegate {
     self.removeView()
   }
   
-  public func tableView(_ tableView: UITableView,
-                        willDisplay cell: UITableViewCell,
-                        forRowAt indexPath: IndexPath) {
-    if disableCellAnimation {
-      return
+  public func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    if self.title == "" && self.message == "" {
+      return nil
     }
     
-    if !self.animatedCells.contains(indexPath) {
-      self.animatedCells.append(indexPath)
-      cell.layer.transform = CATransform3DMakeScale(0.1,0.1,1)
-      UIView.animate(withDuration: 0.5, animations: {
-        cell.layer.transform = CATransform3DMakeScale(1.0,1.0,1)
-      },completion: { finished in
-        UIView.animate(withDuration: 0.1, animations: {
-          cell.layer.transform = CATransform3DMakeScale(1,1,1)
-        })
-      })
+    var cell = tableView.dequeueReusableCell(withIdentifier: "headerCell") as? HAActionSheetHeaderCell
+    if cell == nil {
+      let podBundle = Bundle.init(for: self.classForCoder)
+      if let bundleURL = podBundle.url(forResource: "HAActionSheet", withExtension: "bundle") {
+        let bundle = Bundle.init(url: bundleURL)
+        cell = UINib(nibName: "HAActionSheetHeaderCell", bundle: bundle).instantiate(withOwner: self,
+                                                                                     options: nil)[0] as? HAActionSheetHeaderCell
+        cell?.prepare(title: self.title,
+                      message: self.message,
+                      bgColor: self.headerBackgroundColor,
+                      textColor: self.headerTextColor,
+                      titlefont: self.headerTitleFont,
+                      messagefont: self.headerMessageFont)
+        return cell
+      }
     }
+    return nil
+  }
+  
+  public func tableView(_ tableView: UITableView,
+                        heightForHeaderInSection section: Int) -> CGFloat {
+    if self.title == "" && self.message == "" {
+      return 0
+    }
+    
+    return 90
   }
 }

@@ -36,8 +36,8 @@ class ViewController: UIViewController {
   
   @IBAction func showAction(_ sender: Any) {
     let view = HAActionSheet(fromView: self.view, sourceData: data)
-    view.buttonCornerRadius = 16
-    
+    view.title = "Fruits"
+    view.message = "Pick a fruit"
     view.show { (canceled, index) in
       if !canceled {
        print(self.data[index!])
