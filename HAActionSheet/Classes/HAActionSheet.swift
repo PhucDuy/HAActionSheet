@@ -22,7 +22,6 @@ public class HAActionSheet: UIView {
   public var title                       = ""
   public var message                     = ""
   public var buttonCornerRadius: CGFloat = 16.0
-  public var disableCellAnimation        = true
   public var titleFont                   = UIFont.systemFont(ofSize: 17)
   public var headerTitleFont             = UIFont.boldSystemFont(ofSize: 17)
   public var headerMessageFont           = UIFont.systemFont(ofSize: 14)

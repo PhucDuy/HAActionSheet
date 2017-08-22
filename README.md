@@ -71,11 +71,20 @@ class ViewController: UIViewController {
 /// title for cancel button, default is "Cancel"
 public var cancelButtonTitle: String
 
-/// corner radius for cancel button, first and last button, default is 0.0
+/// corner radius for cancel button, first and last button, default is 16.0
 public var buttonCornerRadius: CGFloat
 
-/// disable button show animation, default is true
-public var disableCellAnimation: Bool
+/// font for header title, default is UIFont.boldSystemFont(ofSize: 17)
+public var headerTitleFont: UIFont
+
+/// font for header message, default is UIFont.systemFont(ofSize: 14)
+public var headerMessageFont: UIFont
+
+/// header background color, default is white
+public var headerBackgroundColor: UIColor
+
+/// header text color, default is black
+public var headerTextColor: UIColor
 
 /// font for button titles, default is system font
 public var titleFont: UIFont
