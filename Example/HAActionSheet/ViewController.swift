@@ -13,22 +13,7 @@ class ViewController: UIViewController {
   let data = ["Apple",
               "Orange",
               "Banana",
-              "Berry",
-              "Apricot",
-              "Asparagus",
-              "Aubergine",
-              "Avocado",
-              "Beetroot",
-              "Black-eye bean",
-              "Broad bean",
-              "Broccoli",
-              "Brussels sprout",
-              "Butternut Squash",
-              "Carrot",
-              "Cherry",
-              "Clementine",
-              "Courgette",
-              "Date"]
+              "Berry"]
   
   override func viewDidLoad() {
     super.viewDidLoad()
